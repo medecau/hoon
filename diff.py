@@ -1,8 +1,8 @@
-def sm(a=None, b=None, isjunk=None, autojunk=True):
+def sm(a=None, b=None, isjunk=None):
     '''Short for the SequenceMatcher constructor. isjunk is moved to the right
     so it\'s not required when providing a and b parameters.'''
     import difflib
-    return difflib.SequenceMatcher(None, a, b)
+    return difflib.SequenceMatcher(isjunk, a, b)
 
 def ratio(a, b):
     '''Return a measure of the sequences' similarity.'''

@@ -62,7 +62,6 @@ class testStringutil(unittest.TestCase):
         self.assertEqual(stringutil.translate(self.s, 'aiu', 'bcd'), 'becod')
     
     def test_to_ascii(self):
-        print stringutil.to_ascii(self.u)
         self.assertEqual(stringutil.to_ascii(self.u), 'aeiouiuc')
 
 
