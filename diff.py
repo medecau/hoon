@@ -19,7 +19,7 @@ def get_opcodes(a, b):
 def qmatch(a, b, ratio=1):
     '''Fast test the similarity of two sequences by testing with
     real_quick_ratio() first.'''
-    smo=sm(a, b)
+    smo = sm(a, b)
     if smo.real_quick_ratio()<ratio:
         return False
     else:

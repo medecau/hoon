@@ -10,7 +10,7 @@ def digest(s, algorithm='sha1'):
     non-ASCII characters, including null bytes.
     
     algorithm parameter defaults to sha1.'''
-    h=hashlib.new(algorithm)
+    h = hashlib.new(algorithm)
     h.update(s)
     return h.digest()
 
@@ -19,6 +19,6 @@ def hexdigest(s, algorithm='sha1'):
     length, containing only hexadecimal digits.
     
     algorithm parameter defaults to sha1.'''
-    h=hashlib.new(algorithm)
+    h = hashlib.new(algorithm)
     h.update(s)
     return h.hexdigest()
