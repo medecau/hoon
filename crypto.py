@@ -1,9 +1,8 @@
 import hashlib
 
 def hash(algorithm='sha1'):
-    '''Generic constructor.
-    
-    algorithm parameter defaults to sha1.'''
+    '''Generic constructor. algorithm parameter defaults to sha1.
+    Returns hash object.'''
     return hashlib.new(algorithm)
 
 def digest(s, algorithm='sha1'):

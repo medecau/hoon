@@ -12,7 +12,7 @@ class testCrypto(unittest.TestCase):
     
     def test_default(self):
         a = crypto.digest(self.test_str)
-        b = hashlib.md5(self.test_str).digest()
+        b = hashlib.sha1(self.test_str).digest()
         self.assertEqual(a, b)
     
     def test_md5(self):
