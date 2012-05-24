@@ -47,7 +47,7 @@ def get_factors(num, short=False):
     from math import sqrt
     factors=[]
     square=sqrt(num)
-    if square.is_integer():
+    if square == int(square):
         factors.append(int(square))
     for f in xrange(1,int(ceil(square))):
         if num%f==0:
