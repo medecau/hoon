@@ -1,12 +1,12 @@
 # -*- coding: utf8 -*-
 
 import unittest
-import crypto
 import hashlib
-import diff
 import difflib
-import mathkit
-import stringutil
+from worm import crypto
+from worm import diff
+from worm import mathkit
+from worm import stringutil
 
 class testCrypto(unittest.TestCase):
     test_str = 'abc'*100
