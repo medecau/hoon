@@ -8,5 +8,5 @@ setup(name='worm',
       author='Pedro Rodrigues',
       author_email='medecau@gmail.com',
       url='https://github.com/medecau/worm',
-      packages=['.'],
+      packages=['worm',]
      )
