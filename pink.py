@@ -42,7 +42,7 @@ def nextprime(num):
             pass
         while True:
             num+=2
-            if is_prime(num):
+            if isprime(num):
                 return num
             else:
                 continue
