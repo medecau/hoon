@@ -16,10 +16,11 @@ def translate(s, old, new):
     '''
     return string.translate(s, string.maketrans(old, new))
 
-def to_ascii(s):
+def toascii(s):
     '''
         Force a string to convert to ASCII.
         non-ASCII characters will be droped
+        TODO: check for better solutions
     '''
     try:
         return s.decode('ascii', 'ignore')
@@ -57,7 +58,7 @@ def append(file, arg, create=True):
         mode = 'a'
     open(file,'a+').write(arg)
 
-def sm(a=None, b=None, isjunk=None):
+def sequence_matcher(a=None, b=None, isjunk=None):
     '''
         Short for the SequenceMatcher constructor.
         isjunk is moved to the right so it\'s not required
@@ -146,7 +147,7 @@ class Fibonacci(object):
         self.a, self.o = self.o, self.a+self.o
         return self.o
 
-def fib_seq(num):
+def fibseq(num):
     '''
         Returns the fibonacci sequence in a list up to num
     '''
@@ -156,7 +157,7 @@ def fib_seq(num):
         seq.append(f.next())
     return seq
 
-def is_prime(num):
+def isprime(num):
     '''
         Checks for the primality of a number
     '''
@@ -171,7 +172,7 @@ def is_prime(num):
                 return False
         return True
 
-def next_prime(num):
+def nextprime(num):
     '''
         Returns the next prime
     '''
@@ -191,9 +192,10 @@ def next_prime(num):
     else:
         return 2
 
-def get_factors(num, short=False):
+def factor(num, short=False):
     '''
         Calculates the factors of num
+        TODO: remove short
     '''
     from math import ceil
     from math import sqrt
