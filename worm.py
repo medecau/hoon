@@ -99,13 +99,6 @@ def qmatch(a, b, ratio=1):
         else:
             return True
 
-def hash(algorithm='sha1'):
-    '''
-        Generic constructor. algorithm parameter defaults to sha1.
-        Returns hash object.
-    '''
-    return hashlib.new(algorithm)
-
 def digest(s, algorithm='sha1'):
     '''
         Return the digest of the string passed in arg. This string may contain
