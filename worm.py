@@ -3,11 +3,13 @@ import string
 import json
 import hashlib
 
-def cute(t):
+def cute(thing, indent=2):
     """
         some humans like it this way
     """
-    return json.dumps(t, indent=2)
+    if type(thing) in [type(str()), type(unicode())]:
+        thing = json.loads(thing)
+    return json.dumps(thing, indent)
 
 def translate(s, old, new):
     '''
@@ -71,26 +73,26 @@ def ratio(a, b):
     '''
         Return a measure of the sequences' similarity.
     '''
-    return sm(a, b).ratio()
+    return sequence_matcher(a, b).ratio()
 
 def qratio(a, b):
     '''
         Return an upper bound on ratio() very quickly.
     '''
-    return sm(a, b).real_quick_ratio()
+    return sequence_matcher(a, b).real_quick_ratio()
 
-def get_opcodes(a, b):
+def opcodes(a, b):
     '''
         Get a list of tuples describing how to turn a into b.
     '''
-    return sm(a, b).get_opcodes()
+    return sequence_matcher(a, b).get_opcodes()
 
 def qmatch(a, b, ratio=1):
     '''
         Fast test the similarity of two sequences by testing with
         real_quick_ratio() first.
     '''
-    smo = sm(a, b)
+    smo = sequence_matcher(a, b)
     if smo.real_quick_ratio()<ratio:
         return False
     else:
