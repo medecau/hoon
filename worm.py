@@ -16,7 +16,7 @@ def translate(s, old, new):
         Translate each character in old to the character
         at the same positionin new
     '''
-    return string.translate(s, string.maketrans(old, new))
+    return s.translate(string.maketrans(old, new))
 
 def toascii(s):
     '''
@@ -28,7 +28,7 @@ def toascii(s):
         return s.decode('ascii', 'ignore')
     except:
         return s.encode('ascii', 'ignore').decode('ascii','ignore')
-def read(file, create=False):
+def read(f, create=False):
     '''
         Read file contents.
         Parameter create sets wether to create a new file or not.'''
@@ -36,9 +36,9 @@ def read(file, create=False):
         mode = 'r+'
     else:
         mode = 'r'
-    return open(file, mode).read()
+    return open(f, mode).read()
 
-def write(file, arg, create=True):
+def write(f, arg, create=True):
     '''
         Write contents to file.
         Parameter create sets wether to create a new file or not.
@@ -47,9 +47,9 @@ def write(file, arg, create=True):
         mode = 'w+'
     else:
         mode = 'w'
-    open(file, mode).write(arg)
+    open(f, mode).write(arg)
 
-def append(file, arg, create=True):
+def append(f, arg, create=True):
     '''
         Write contents to file.
         Parameter create sets wether to create a new file or not.
@@ -58,7 +58,7 @@ def append(file, arg, create=True):
         mode = 'a+'
     else:
         mode = 'a'
-    open(file,'a+').write(arg)
+    open(f, mode).write(arg)
 
 def sequence_matcher(a=None, b=None, isjunk=None):
     '''
