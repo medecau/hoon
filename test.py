@@ -4,12 +4,13 @@ import unittest
 import hashlib
 import difflib
 import worm
+import pink
 
 class testWorm(unittest.TestCase):
     test_str = 'abc'*100
     s1 = 'aeou'
     s2 = 'eio'
-    a = worm.sm(s1, s2)
+    a = worm.sequence_matcher(s1, s2)
     b = difflib.SequenceMatcher(None, s1, s2)
     s = 'aeiou'
     u = '\xc3aeiouáàâãéèâãíìîióòôõúùûucç'
@@ -30,7 +31,7 @@ class testWorm(unittest.TestCase):
         self.assertEqual(a, b)
     
     def test_constructor(self):
-        self.assertEqual(worm.sm(self.s1, self.s2).get_opcodes(), self.b.get_opcodes())
+        self.assertEqual(worm.sequence_matcher(self.s1, self.s2).get_opcodes(), self.b.get_opcodes())
     
     def test_qratio(self):
         self.assertEqual(worm.qratio(self.s1, self.s2), self.b.real_quick_ratio())
@@ -50,52 +51,52 @@ class testWorm(unittest.TestCase):
     def test_translate(self):
         self.assertEqual(worm.translate(self.s, 'aiu', 'bcd'), 'becod')
     
-    def test_to_ascii(self):
-        self.assertEqual(worm.to_ascii(self.u), 'aeiouiuc')
+    def test_toascii(self):
+        self.assertEqual(worm.toascii(self.u), 'aeiouiuc')
     
-    def test_is_prime(self):
-        self.assertTrue(worm.is_prime(2))
-        self.assertTrue(worm.is_prime(11))
-        self.assertFalse(worm.is_prime(0))
-        self.assertFalse(worm.is_prime(1))
-        self.assertFalse(worm.is_prime(-1))
-        self.assertFalse(worm.is_prime(9))
+    def test_isprime(self):
+        self.assertTrue(pink.isprime(2))
+        self.assertTrue(pink.isprime(11))
+        self.assertFalse(pink.isprime(0))
+        self.assertFalse(pink.isprime(1))
+        self.assertFalse(pink.isprime(-1))
+        self.assertFalse(pink.isprime(9))
 
-    def test_next_prime(self):
-        self.assertEqual(worm.next_prime(-1), 2)
-        self.assertEqual(worm.next_prime(1), 2)
-        self.assertEqual(worm.next_prime(2), 3)
-        self.assertEqual(worm.next_prime(3), 5)
-        self.assertEqual(worm.next_prime(9), 11)
+    def test_nextprime(self):
+        self.assertEqual(pink.nextprime(-1), 2)
+        self.assertEqual(pink.nextprime(1), 2)
+        self.assertEqual(pink.nextprime(2), 3)
+        self.assertEqual(pink.nextprime(3), 5)
+        self.assertEqual(pink.nextprime(9), 11)
 
-    def test_get_factors(self):
-        factors=worm.get_factors(1)
+    def test_factor(self):
+        factors=pink.factor(1)
         self.assertEqual(factors, [1])
         
-        factors=worm.get_factors(2)
+        factors=pink.factor(2)
         self.assertEqual(factors, [1,2])
 
-        factors=worm.get_factors(3)
+        factors=pink.factor(3)
         self.assertEqual(factors, [1,3])
 
-        factors=worm.get_factors(8)
+        factors=pink.factor(8)
         factors.sort()
         self.assertEqual(factors, [1,2,4,8])
 
-        factors=worm.get_factors(25)
+        factors=pink.factor(25)
         factors.sort()
         self.assertEqual(factors, [1,5,25])
 
-        factors=worm.get_factors(8, True)
+        factors=pink.factor(8, True)
         factors.sort()
         self.assertEqual(factors, [2,4])
 
-        factors=worm.get_factors(25, True)
+        factors=pink.factor(25, True)
         factors.sort()
         self.assertEqual(factors, [5])
 
     def test_fibonacci(self):
-        fibonacci_nums=worm.fib_seq(10)
+        fibonacci_nums=pink.fibseq(10)
         self.assertEqual(fibonacci_nums, [1, 2, 3, 5, 8, 13, 21, 34, 55, 89])
 
 if __name__ == '__main__':
