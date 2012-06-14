@@ -5,7 +5,7 @@ import hashlib
 
 def cute(thing, indent=2):
     """
-        some humans like it this way
+        Some humans like it this way
     """
     if type(thing) in [type(str()), type(unicode())]:
         thing = json.loads(thing)
