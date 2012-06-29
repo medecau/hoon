@@ -16,17 +16,17 @@ class testWorm(unittest.TestCase):
     u = '\xc3aeiouáàâãéèâãíìîióòôõúùûucç'
     
     def test_default(self):
-        a = worm.digest(self.test_str)
+        a = worm.binhash(self.test_str)
         b = hashlib.sha1(self.test_str).digest()
         self.assertEqual(a, b)
     
     def test_md5(self):
-        a = worm.digest(self.test_str, 'md5')
+        a = worm.binhash(self.test_str, 'md5')
         b = hashlib.md5(self.test_str).digest()
         self.assertEqual(a, b)
     
     def test_sha1(self):
-        a = worm.digest(self.test_str, 'sha1')
+        a = worm.binhash(self.test_str, 'sha1')
         b = hashlib.sha1(self.test_str).digest()
         self.assertEqual(a, b)
     
@@ -51,8 +51,8 @@ class testWorm(unittest.TestCase):
     def test_translate(self):
         self.assertEqual(worm.translate(self.s, 'aiu', 'bcd'), 'becod')
     
-    def test_toascii(self):
-        self.assertEqual(worm.toascii(self.u), 'aeiouiuc')
+    def test_force_ascii(self):
+        self.assertEqual(worm.force_ascii(self.u), 'aeiouiuc')
     
     def test_isprime(self):
         self.assertTrue(pink.isprime(2))
