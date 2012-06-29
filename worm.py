@@ -4,9 +4,9 @@ import json
 import hashlib
 
 def prettify(thing, indent=2):
-    """
+    '''
         Some humans like it this way
-    """
+    '''
     if type(thing) in [type(str()), type(unicode())]:
         thing = json.loads(thing)
     return json.dumps(thing, indent)
@@ -14,7 +14,8 @@ def prettify(thing, indent=2):
 def fread(f, create=False):
     '''
         Read file contents.
-        Parameter create sets wether to create a new file or not.'''
+        Parameter create sets wether to create a new file or not.
+    '''
     if create:
         mode = 'r+'
     else:
@@ -125,10 +126,10 @@ def hash(s, algorithm='sha1'):
     return h.hexdigest()
 
 def request(url, data):
-    """
+    '''
         Makes a simple request. If no data it's a GET else it's a POST.
         Returns a string.
-    """
+    '''
     if data is not None:
         post_data = urllib.urlencode(data)
     else:
