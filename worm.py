@@ -3,7 +3,7 @@ import string
 import json
 import hashlib
 
-def cute(thing, indent=2):
+def prettify(thing, indent=2):
     """
         Some humans like it this way
     """
@@ -11,24 +11,7 @@ def cute(thing, indent=2):
         thing = json.loads(thing)
     return json.dumps(thing, indent)
 
-def translate(s, old, new):
-    '''
-        Translate each character in old to the character
-        at the same positionin new
-    '''
-    return s.translate(string.maketrans(old, new))
-
-def toascii(s):
-    '''
-        Force a string to convert to ASCII.
-        non-ASCII characters will be droped
-        TODO: check for better solutions
-    '''
-    try:
-        return s.decode('ascii', 'ignore')
-    except:
-        return s.encode('ascii', 'ignore').decode('ascii','ignore')
-def read(f, create=False):
+def fread(f, create=False):
     '''
         Read file contents.
         Parameter create sets wether to create a new file or not.'''
@@ -38,18 +21,18 @@ def read(f, create=False):
         mode = 'r'
     return open(f, mode).read()
 
-def write(f, arg, create=True):
+def fwrite(f, data, create=True):
     '''
-        Write contents to file.
+        Write data to file.
         Parameter create sets wether to create a new file or not.
     '''
     if create:
         mode = 'w+'
     else:
         mode = 'w'
-    open(f, mode).write(arg)
+    open(f, mode).write(data)
 
-def append(f, arg, create=True):
+def fappend(f, data, create=True):
     '''
         Write contents to file.
         Parameter create sets wether to create a new file or not.
@@ -58,7 +41,25 @@ def append(f, arg, create=True):
         mode = 'a+'
     else:
         mode = 'a'
-    open(f, mode).write(arg)
+    open(f, mode).write(data)
+
+def translate(s, old, new):
+    '''
+        Translate each character in old to the character
+        at the same positionin new
+    '''
+    return s.translate(string.maketrans(old, new))
+
+def force_ascii(s):
+    '''
+        Force a string to convert to ASCII.
+        non-ASCII characters will be droped
+        TODO: check for better solutions
+    '''
+    try:
+        return s.decode('ascii', 'ignore')
+    except:
+        return s.encode('ascii', 'ignore').decode('ascii','ignore')
 
 def sequence_matcher(a=None, b=None, isjunk=None):
     '''
@@ -101,9 +102,9 @@ def qmatch(a, b, ratio=1):
         else:
             return True
 
-def digest(s, algorithm='sha1'):
+def binhash(s, algorithm='sha1'):
     '''
-        Return the digest of the string passed in arg. This string may contain
+        Return the digest of the string passed in s. This string may contain
         non-ASCII characters, including null bytes.
 
         algorithm parameter defaults to sha1.
@@ -112,9 +113,9 @@ def digest(s, algorithm='sha1'):
     h.update(s)
     return h.digest()
 
-def hexdigest(s, algorithm='sha1'):
+def hash(s, algorithm='sha1'):
     '''
-        Like digest() except the digest is returned as a string of double
+        Like binhash() except the digest is returned as a string of double
         length, containing only hexadecimal digits.
 
         algorithm parameter defaults to sha1.
