@@ -2,6 +2,7 @@ import urllib
 import string
 import json
 import hashlib
+import os.path
 
 def prettify(thing, indent=2):
     '''
@@ -10,6 +11,12 @@ def prettify(thing, indent=2):
     if type(thing) in [type(str()), type(unicode())]:
         thing = json.loads(thing)
     return json.dumps(thing, indent)
+
+def fexists(f):
+    '''
+        Check if path exists
+    '''
+    return os.path.exists(f)
 
 def fread(f, create=False):
     '''
