@@ -66,6 +66,21 @@ when providing a and b parameters.
 Translate each character in old to the character
 at the same positionin new
 
+
+# pink
+### factor(num, short=False)
+Calculates the factors of num
+TODO: remove short
+### fibseq(num)
+Returns the fibonacci sequence in a list up to num
+### isprime(num)
+Checks for the primality of a number
+### nextprime(num)
+Returns the next prime
+## Fibonacci()
+### next()
+
+
 # Bugs & Co.
 
 Found bugs or have a new feature that you want to add?
