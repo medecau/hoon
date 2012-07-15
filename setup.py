@@ -1,10 +1,10 @@
 from distutils.core import setup
 
-setup(name='worm',
+setup(name='hoon',
       version='0.3.0',
-      py_modules=['worm',],
+      py_modules=['hoon',],
       description='Python boilerplate with nice defaults.',
       author='Pedro Rodrigues',
       author_email='medecau@gmail.com',
-      url='https://github.com/medecau/worm',
+      url='https://github.com/medecau/hoon',
      )

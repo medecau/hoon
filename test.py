@@ -3,56 +3,56 @@
 import unittest
 import hashlib
 import difflib
-import worm
+import hoon
 import pink
 
-class testWorm(unittest.TestCase):
+class testHoon(unittest.TestCase):
     test_str = 'abc'*100
     s1 = 'aeou'
     s2 = 'eio'
-    a = worm.sequence_matcher(s1, s2)
+    a = hoon.sequence_matcher(s1, s2)
     b = difflib.SequenceMatcher(None, s1, s2)
     s = 'aeiou'
     u = '\xc3aeiouáàâãéèâãíìîióòôõúùûucç'
     
     def test_default(self):
-        a = worm.binhash(self.test_str)
+        a = hoon.binhash(self.test_str)
         b = hashlib.sha1(self.test_str).digest()
         self.assertEqual(a, b)
     
     def test_md5(self):
-        a = worm.binhash(self.test_str, 'md5')
+        a = hoon.binhash(self.test_str, 'md5')
         b = hashlib.md5(self.test_str).digest()
         self.assertEqual(a, b)
     
     def test_sha1(self):
-        a = worm.binhash(self.test_str, 'sha1')
+        a = hoon.binhash(self.test_str, 'sha1')
         b = hashlib.sha1(self.test_str).digest()
         self.assertEqual(a, b)
     
     def test_constructor(self):
-        self.assertEqual(worm.sequence_matcher(self.s1, self.s2).get_opcodes(), self.b.get_opcodes())
+        self.assertEqual(hoon.sequence_matcher(self.s1, self.s2).get_opcodes(), self.b.get_opcodes())
     
     def test_qratio(self):
-        self.assertEqual(worm.qratio(self.s1, self.s2), self.b.real_quick_ratio())
+        self.assertEqual(hoon.qratio(self.s1, self.s2), self.b.real_quick_ratio())
     
         '''This helps test qmatch'''
-        qr = worm.qratio(self.s1, self.s2)
+        qr = hoon.qratio(self.s1, self.s2)
         self.assertTrue(qr<0.9 and qr>0.7)
     
     def test_ratio(self):
-        self.assertEqual(worm.ratio(self.s1, self.s2), self.b.ratio())
+        self.assertEqual(hoon.ratio(self.s1, self.s2), self.b.ratio())
     
     def test_qmatch(self):
-        self.assertFalse(worm.qmatch(self.s1, self.s2, 0.9))
-        self.assertFalse(worm.qmatch(self.s1, self.s2, 0.7))
-        self.assertTrue(worm.qmatch(self.s1, self.s2, 0.5))
+        self.assertFalse(hoon.qmatch(self.s1, self.s2, 0.9))
+        self.assertFalse(hoon.qmatch(self.s1, self.s2, 0.7))
+        self.assertTrue(hoon.qmatch(self.s1, self.s2, 0.5))
     
     def test_translate(self):
-        self.assertEqual(worm.translate(self.s, 'aiu', 'bcd'), 'becod')
+        self.assertEqual(hoon.translate(self.s, 'aiu', 'bcd'), 'becod')
     
     def test_force_ascii(self):
-        self.assertEqual(worm.force_ascii(self.u), 'aeiouiuc')
+        self.assertEqual(hoon.force_ascii(self.u), u'aeiouiuc')
     
     def test_isprime(self):
         self.assertTrue(pink.isprime(2))
