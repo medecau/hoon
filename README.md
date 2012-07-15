@@ -58,7 +58,7 @@ Return a measure of the sequences' similarity.
 ### request(url, data)
 Makes a simple request. If no data it's a GET else it's a POST.
 Returns a string.
-### sequence_matcher(a=None, a=None, a=None, b=None, b=None, b=None, isjunk=None, isjunk=None, isjunk=None)
+### sequence_matcher(a=None, b=None, isjunk=None)
 Short for the SequenceMatcher constructor.
 isjunk is moved to the right so it's not required
 when providing a and b parameters.
@@ -85,6 +85,6 @@ Returns the next prime
 
 Found bugs or have a new feature that you want to add?
 
-     * [Fork and add changes](https://github.com/medecau/hoon/fork)
-     * [Fork and write tests that fail](https://github.com/medecau/hoon/fork)
-     * [Submit an issue in github](https://github.com/medecau/hoon/issues)
+* [Fork and add changes](https://github.com/medecau/hoon/fork)
+* [Fork and write tests that fail](https://github.com/medecau/hoon/fork)
+* [Submit an issue in github](https://github.com/medecau/hoon/issues)
