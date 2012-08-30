@@ -4,7 +4,7 @@ import unittest
 import hashlib
 import difflib
 import hoon
-import pink
+from hoon import pink
 
 class testHoon(unittest.TestCase):
     test_str = 'abc'*100
