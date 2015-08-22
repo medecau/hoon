@@ -2,7 +2,7 @@ import urllib
 import string
 import json
 import hashlib
-import os.path
+
 
 def prettify(thing, indent=2):
     '''
@@ -12,44 +12,6 @@ def prettify(thing, indent=2):
         thing = json.loads(thing)
     return json.dumps(thing, indent)
 
-def fexists(f):
-    '''
-        Check if path exists
-    '''
-    return os.path.exists(f)
-
-def fread(f, create=False):
-    '''
-        Read file contents.
-        Parameter create sets wether to create a new file or not.
-    '''
-    if create:
-        mode = 'r+'
-    else:
-        mode = 'r'
-    return open(f, mode).read()
-
-def fwrite(f, data, create=True):
-    '''
-        Write data to file.
-        Parameter create sets wether to create a new file or not.
-    '''
-    if create:
-        mode = 'w+'
-    else:
-        mode = 'w'
-    open(f, mode).write(data)
-
-def fappend(f, data, create=True):
-    '''
-        Write contents to file.
-        Parameter create sets wether to create a new file or not.
-    '''
-    if create:
-        mode = 'a+'
-    else:
-        mode = 'a'
-    open(f, mode).write(data)
 
 def translate(s, old, new):
     '''
@@ -58,16 +20,6 @@ def translate(s, old, new):
     '''
     return s.translate(string.maketrans(old, new))
 
-def force_ascii(s):
-    '''
-        Force a string to convert to ASCII.
-        non-ASCII characters will be droped
-        TODO: check for better solutions
-    '''
-    try:
-        return s.decode('ascii', 'ignore')
-    except:
-        return s.encode('ascii', 'ignore').decode('ascii','ignore')
 
 def sequence_matcher(a=None, b=None, isjunk=None):
     '''
@@ -78,11 +30,13 @@ def sequence_matcher(a=None, b=None, isjunk=None):
     import difflib
     return difflib.SequenceMatcher(isjunk, a, b)
 
+
 def ratio(a, b):
     '''
         Return a measure of the sequences' similarity.
     '''
     return sequence_matcher(a, b).ratio()
+
 
 def qratio(a, b):
     '''
@@ -90,11 +44,13 @@ def qratio(a, b):
     '''
     return sequence_matcher(a, b).real_quick_ratio()
 
+
 def opcodes(a, b):
     '''
         Get a list of tuples describing how to turn a into b.
     '''
     return sequence_matcher(a, b).get_opcodes()
+
 
 def qmatch(a, b, ratio=1):
     '''
@@ -102,13 +58,14 @@ def qmatch(a, b, ratio=1):
         real_quick_ratio() first.
     '''
     smo = sequence_matcher(a, b)
-    if smo.real_quick_ratio()<ratio:
+    if smo.real_quick_ratio() < ratio:
         return False
     else:
-        if smo.ratio()<ratio:
+        if smo.ratio() < ratio:
             return False
         else:
             return True
+
 
 def binhash(s, algorithm='sha1'):
     '''
@@ -121,6 +78,7 @@ def binhash(s, algorithm='sha1'):
     h.update(s)
     return h.digest()
 
+
 def hash(s, algorithm='sha1'):
     '''
         Like binhash() except the digest is returned as a string of double
@@ -132,6 +90,7 @@ def hash(s, algorithm='sha1'):
     h.update(s)
     return h.hexdigest()
 
+
 def request(url, data):
     '''
         Makes a simple request. If no data it's a GET else it's a POST.
@@ -142,11 +101,3 @@ def request(url, data):
     else:
         post_data = None
     return urllib.urlopen(url, post_data).read()
-
-def obj(name='anonymous'):
-    '''
-        Returns a new object
-        TODO: change the type and allow for isinstance() to work properly
-    '''
-    return type(str(name), (object, ), {})
-
