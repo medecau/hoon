@@ -2,6 +2,7 @@ import urllib
 import string
 import json
 import hashlib
+import six
 
 
 def prettify(thing, indent=2):
