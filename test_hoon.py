@@ -31,10 +31,12 @@ class TestHoon(unittest.TestCase):
         self.assertEqual(a, b)
 
     def test_constructor(self):
-        self.assertEqual(hoon.sequence_matcher(self.s1, self.s2).get_opcodes(), self.b.get_opcodes())
+        self.assertEqual(hoon.sequence_matcher(self.s1, self.s2).get_opcodes(),
+                         self.b.get_opcodes())
 
     def test_qratio(self):
-        self.assertEqual(hoon.qratio(self.s1, self.s2), self.b.real_quick_ratio())
+        self.assertEqual(hoon.qratio(self.s1, self.s2),
+                         self.b.real_quick_ratio())
 
         '''This helps test qmatch'''
         qr = hoon.qratio(self.s1, self.s2)
