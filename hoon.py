@@ -1,7 +1,3 @@
-import urllib
-import string
-import json
-import hashlib
 import six
 
 
@@ -9,6 +5,7 @@ def prettify(thing, indent=2):
     '''
         Some humans like it this way
     '''
+    import json
     if type(thing) is six.binary_type:
         thing = json.loads(thing)
     return json.dumps(thing, indent)
@@ -20,8 +17,9 @@ def translate(s, old, new):
         at the same positionin new
     '''
     if six.PY3:
-        trans = str.maketrans(old, new)
+        trans = type(old).maketrans(old, new)
     else:
+        import string
         trans = string.maketrans(old, new)
     return s.translate(trans)
 
@@ -77,6 +75,7 @@ def _hash(s, algorithm='sha1'):
         Internal hashing function.
         Returns a hashing object.
     """
+    import hashlib
     h = hashlib.new(algorithm)
     h.update(s)
     return h
@@ -107,6 +106,7 @@ def request(url, data):
         Makes a simple request. If no data it's a GET else it's a POST.
         Returns a string.
     '''
+    import urllib
     if data is not None:
         post_data = urllib.urlencode(data)
     else:
