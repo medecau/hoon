@@ -7,7 +7,7 @@ import hoon
 
 
 class TestHoon(unittest.TestCase):
-    test_str = 'abc' * 100
+    test_str = b'abc' * 100
     s1 = 'aeou'
     s2 = 'eio'
     a = hoon.sequence_matcher(s1, s2)

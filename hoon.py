@@ -9,7 +9,7 @@ def prettify(thing, indent=2):
     '''
         Some humans like it this way
     '''
-    if type(thing) in [type(str()), type(unicode())]:
+    if type(thing) is six.binary_type:
         thing = json.loads(thing)
     return json.dumps(thing, indent)
 
@@ -19,7 +19,11 @@ def translate(s, old, new):
         Translate each character in old to the character
         at the same positionin new
     '''
-    return s.translate(string.maketrans(old, new))
+    if six.PY3:
+        trans = str.maketrans(old, new)
+    else:
+        trans = string.maketrans(old, new)
+    return s.translate(trans)
 
 
 def sequence_matcher(a=None, b=None, isjunk=None):
@@ -68,6 +72,16 @@ def qmatch(a, b, ratio=1):
             return True
 
 
+def _hash(s, algorithm='sha1'):
+    """
+        Internal hashing function.
+        Returns a hashing object.
+    """
+    h = hashlib.new(algorithm)
+    h.update(s)
+    return h
+
+
 def binhash(s, algorithm='sha1'):
     '''
         Return the digest of the string passed in s. This string may contain
@@ -75,9 +89,7 @@ def binhash(s, algorithm='sha1'):
 
         algorithm parameter defaults to sha1.
     '''
-    h = hashlib.new(algorithm)
-    h.update(s)
-    return h.digest()
+    return _hash(s, algorithm).digest()
 
 
 def hash(s, algorithm='sha1'):
@@ -87,9 +99,7 @@ def hash(s, algorithm='sha1'):
 
         algorithm parameter defaults to sha1.
     '''
-    h = hashlib.new(algorithm)
-    h.update(s)
-    return h.hexdigest()
+    return _hash(s, algorithm).hexdigest()
 
 
 def request(url, data):
