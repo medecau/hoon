@@ -14,11 +14,6 @@ Don't expect backwards compatibility in hoon, each version usually breaks everyt
 
 # Documentation
 
-### binhash(s, algorithm=sha1)
-Return the digest of the string passed in s. This string may contain
-non-ASCII characters, including null bytes.
-
-algorithm parameter defaults to sha1.
 ### hash(s, algorithm=sha1)
 Like binhash() except the digest is returned as a string of double
 length, containing only hexadecimal digits.
@@ -45,6 +40,8 @@ when providing a and b parameters.
 ### translate(s, old, new)
 Translate each character in old to the character
 at the same positionin new
+### int_bytes(n)
+Convert integer numbers to binary data.
 
 # Bugs & Co.
 

@@ -1,16 +1,6 @@
 import six
 
 
-def prettify(thing, indent=2):
-    '''
-        Some humans like it this way
-    '''
-    import json
-    if type(thing) is six.binary_type:
-        thing = json.loads(thing)
-    return json.dumps(thing, indent)
-
-
 def translate(s, old, new):
     '''
         Translate each character in old to the character
@@ -27,7 +17,7 @@ def translate(s, old, new):
 def sequence_matcher(a=None, b=None, isjunk=None):
     '''
         Short for the SequenceMatcher constructor.
-        isjunk is moved to the right so it\'s not required
+        isjunk is moved to the right so it's not required
         when providing a and b parameters.
     '''
     import difflib
@@ -95,7 +85,10 @@ def request(url, data):
         post_data = None
     return urllib.urlopen(url, post_data).read()
 
-def to_bytes(n):
+def int_bytes(n):
+    '''
+        Converts integers to bytes.
+    '''
     r = six.binary_type()
     while n > 0:
         r += chr(n % 256).encode()

@@ -53,8 +53,8 @@ class TestHoon(unittest.TestCase):
     def test_translate(self):
         self.assertEqual(hoon.translate(self.s, 'aiu', 'bcd'), 'becod')
 
-    def test_to_bytes(self):
-        self.assertEqual(hoon.to_bytes(65), b'A')
+    def test_int_bytes(self):
+        self.assertEqual(hoon.int_bytes(65), b'A')
 
 
 if __name__ == '__main__':
