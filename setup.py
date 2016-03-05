@@ -1,10 +1,9 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(name='hoon',
-      version='0.5.0',
+      version='0.6.0',
       py_modules=['hoon'],
       description='Boilerplate and nice defaults.',
       author='Pedro Rodrigues',
       author_email='medecau@gmail.com',
-      url='https://github.com/medecau/hoon',
-      )
+      url='https://github.com/medecau/hoon')
