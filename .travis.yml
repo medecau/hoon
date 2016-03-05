@@ -13,3 +13,5 @@ python:
   - pypy3
 install: pip install pytest
 script: py.test
+notifications:
+  on_success: change

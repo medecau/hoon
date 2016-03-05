@@ -70,35 +70,17 @@ def qmatch(a, b, ratio=1):
             return True
 
 
-def _hash(s, algorithm='sha1'):
-    """
-        Internal hashing function.
-        Returns a hashing object.
-    """
-    import hashlib
-    h = hashlib.new(algorithm)
-    h.update(s)
-    return h
-
-
-def binhash(s, algorithm='sha1'):
+def hash(s, algorithm='sha1'):
     '''
         Return the digest of the string passed in s. This string may contain
         non-ASCII characters, including null bytes.
 
         algorithm parameter defaults to sha1.
     '''
-    return _hash(s, algorithm).digest()
-
-
-def hash(s, algorithm='sha1'):
-    '''
-        Like binhash() except the digest is returned as a string of double
-        length, containing only hexadecimal digits.
-
-        algorithm parameter defaults to sha1.
-    '''
-    return _hash(s, algorithm).hexdigest()
+    import hashlib
+    h = hashlib.new(algorithm)
+    h.update(s)
+    return h.digest()
 
 
 def request(url, data):
@@ -112,3 +94,11 @@ def request(url, data):
     else:
         post_data = None
     return urllib.urlopen(url, post_data).read()
+
+def to_bytes(n):
+    r = six.binary_type()
+    while n > 0:
+        r += chr(n % 256).encode()
+        n = int(n / 256)
+    return r
+

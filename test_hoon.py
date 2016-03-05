@@ -16,17 +16,17 @@ class TestHoon(unittest.TestCase):
     u = '\xc3aeiouáàâãéèâãíìîióòôõúùûucç'
 
     def test_default(self):
-        a = hoon.binhash(self.test_str)
+        a = hoon.hash(self.test_str)
         b = hashlib.sha1(self.test_str).digest()
         self.assertEqual(a, b)
 
     def test_md5(self):
-        a = hoon.binhash(self.test_str, 'md5')
+        a = hoon.hash(self.test_str, 'md5')
         b = hashlib.md5(self.test_str).digest()
         self.assertEqual(a, b)
 
     def test_sha1(self):
-        a = hoon.binhash(self.test_str, 'sha1')
+        a = hoon.hash(self.test_str, 'sha1')
         b = hashlib.sha1(self.test_str).digest()
         self.assertEqual(a, b)
 
@@ -52,6 +52,9 @@ class TestHoon(unittest.TestCase):
 
     def test_translate(self):
         self.assertEqual(hoon.translate(self.s, 'aiu', 'bcd'), 'becod')
+
+    def test_to_bytes(self):
+        self.assertEqual(hoon.to_bytes(65), b'A')
 
 
 if __name__ == '__main__':
