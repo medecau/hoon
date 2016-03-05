@@ -47,6 +47,5 @@ Convert integer numbers to binary data.
 
 Found bugs or have a new feature that you want to add?
 
-* [Fork and add changes](https://github.com/medecau/hoon/fork)
-* [Fork and write tests that fail](https://github.com/medecau/hoon/fork)
 * [Submit an issue in github](https://github.com/medecau/hoon/issues)
+* [Fork and add changes](https://github.com/medecau/hoon/fork)
