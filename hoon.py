@@ -1,4 +1,51 @@
 import six
+import functools
+
+
+__version__ = '0.7.0'
+
+if six.PY3:
+    reduce = functools.reduce
+
+
+def partial(f, *args, **kwargs):
+    pf = functools.partial(f, *args, **kwargs)
+    f = functools.update_wrapper(pf, f)
+    return f
+
+
+def mapped(f):
+    """
+        coverts a simple function into a map-like function
+        to be used as a decorator
+    """
+    @functools.wraps(f)
+    def __mapped(i):
+        return map(f, i)
+    return __mapped
+
+
+def reduced(f):
+    """
+        coverts a simple function into a reduce-like function
+        to be used as a decorator
+    """
+    @functools.wraps(f)
+    def __reduced(i):
+        return reduce(f, i)
+    return __reduced
+
+
+def compose(*args):
+    """
+        composes a new function
+        creates a function composed of other functions
+    """
+    def __pipe(v):
+        for f in args:
+            v = f(v)
+        return v
+    return __pipe
 
 
 def translate(s, old, new):
@@ -73,18 +120,6 @@ def hash(s, algorithm='sha1'):
     return h.digest()
 
 
-def request(url, data):
-    '''
-        Makes a simple request. If no data it's a GET else it's a POST.
-        Returns a string.
-    '''
-    import urllib
-    if data is not None:
-        post_data = urllib.urlencode(data)
-    else:
-        post_data = None
-    return urllib.urlopen(url, post_data).read()
-
 def int_bytes(n):
     '''
         Converts integers to bytes.
@@ -94,4 +129,3 @@ def int_bytes(n):
         r += chr(n % 256).encode()
         n = int(n / 256)
     return r
-

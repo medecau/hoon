@@ -1,7 +1,8 @@
+from hoon import __version__
 from setuptools import setup
 
 setup(name='hoon',
-      version='0.6.0',
+      version=__version__,
       py_modules=['hoon'],
       description='Boilerplate and nice defaults.',
       author='Pedro Rodrigues',
