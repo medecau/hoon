@@ -2,8 +2,6 @@ import six
 import functools
 
 
-__version__ = '0.7.0'
-
 if six.PY3:
     reduce = functools.reduce
 
