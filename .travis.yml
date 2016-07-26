@@ -24,6 +24,7 @@ install:
       pip install pycodestyle
     else
       pip install pytest
+      pip install .
     fi
 
 script:
