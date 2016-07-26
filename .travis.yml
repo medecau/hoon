@@ -7,11 +7,32 @@ python:
   - 3.3
   - 3.4
   - 3.5
-  - 3.5-dev
   - nightly
   - pypy
   - pypy3
-install: pip install pytest
-script: py.test
+
+matrix:
+  include:
+    - python: 2.7
+      env: CODESTYLE=true
+    - python: 3.5
+      env: CODESTYLE=true
+
+install:
+  - |
+    if [[ $CODESTYLE ]]; then
+      pip install pycodestyle
+    else
+      pip install pytest
+    fi
+
+script:
+ - |
+    if [[ $CODESTYLE ]]; then
+      pycodestyle
+    else
+      py.test
+    fi
+
 notifications:
   on_success: change
