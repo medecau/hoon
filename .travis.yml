@@ -30,9 +30,9 @@ install:
 script:
  - |
     if [[ $CODESTYLE ]]; then
-      pycodestyle
+      pycodestyle --verbose
     else
-      py.test
+      py.test --verbose
     fi
 
 notifications:
