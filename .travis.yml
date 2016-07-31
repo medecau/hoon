@@ -1,39 +1,20 @@
 sudo: false
 language: python
-python:
-  - 2.6
-  - 2.7
-  - 3.2
-  - 3.3
-  - 3.4
-  - 3.5
-  - nightly
-  - pypy
-  - pypy3
+python: 3.5
+env:
+  - TOXENV=py26
+  - TOXENV=py27
+  - TOXENV=py32
+  - TOXENV=py33
+  - TOXENV=py34
+  - TOXENV=py35
+  - TOXENV=pypy
+  - TOXENV=pypy3
+  - TOXENV=codestyle
 
-matrix:
-  include:
-    - python: 2.7
-      env: CODESTYLE=true
-    - python: 3.5
-      env: CODESTYLE=true
+install: pip install tox
 
-install:
-  - |
-    if [[ $CODESTYLE ]]; then
-      pip install pycodestyle
-    else
-      pip install pytest
-      pip install .
-    fi
-
-script:
- - |
-    if [[ $CODESTYLE ]]; then
-      pycodestyle --verbose
-    else
-      py.test --verbose
-    fi
+script: tox
 
 notifications:
   on_success: change
