@@ -7,13 +7,13 @@ import hoon
 
 
 class TestHoon(unittest.TestCase):
-    test_str = b'abc' * 100
-    s1 = 'aeou'
-    s2 = 'eio'
+    test_str = b"abc" * 100
+    s1 = "aeou"
+    s2 = "eio"
     a = hoon.sequence_matcher(s1, s2)
     b = difflib.SequenceMatcher(None, s1, s2)
-    s = 'aeiou'
-    u = '\xc3aeiouáàâãéèâãíìîióòôõúùûucç'
+    s = "aeiou"
+    u = "\xc3aeiouáàâãéèâãíìîióòôõúùûucç"
 
     def test_default(self):
         a = hoon.hash(self.test_str)
@@ -21,24 +21,24 @@ class TestHoon(unittest.TestCase):
         self.assertEqual(a, b)
 
     def test_md5(self):
-        a = hoon.hash(self.test_str, 'md5')
+        a = hoon.hash(self.test_str, "md5")
         b = hashlib.md5(self.test_str).digest()
         self.assertEqual(a, b)
 
     def test_sha1(self):
-        a = hoon.hash(self.test_str, 'sha1')
+        a = hoon.hash(self.test_str, "sha1")
         b = hashlib.sha1(self.test_str).digest()
         self.assertEqual(a, b)
 
     def test_constructor(self):
-        self.assertEqual(hoon.sequence_matcher(self.s1, self.s2).get_opcodes(),
-                         self.b.get_opcodes())
+        self.assertEqual(
+            hoon.sequence_matcher(self.s1, self.s2).get_opcodes(), self.b.get_opcodes()
+        )
 
     def test_qratio(self):
-        self.assertEqual(hoon.qratio(self.s1, self.s2),
-                         self.b.real_quick_ratio())
+        self.assertEqual(hoon.qratio(self.s1, self.s2), self.b.real_quick_ratio())
 
-        '''This helps test qmatch'''
+        """This helps test qmatch"""
         qr = hoon.qratio(self.s1, self.s2)
         self.assertTrue(qr < 0.9 and qr > 0.7)
 
@@ -51,11 +51,11 @@ class TestHoon(unittest.TestCase):
         self.assertTrue(hoon.qmatch(self.s1, self.s2, 0.5))
 
     def test_translate(self):
-        self.assertEqual(hoon.translate(self.s, 'aiu', 'bcd'), 'becod')
+        self.assertEqual(hoon.translate(self.s, "aiu", "bcd"), "becod")
 
     def test_int_bytes(self):
-        self.assertEqual(hoon.int_bytes(65), b'A')
+        self.assertEqual(hoon.int_bytes(65), b"A")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
