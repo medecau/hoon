@@ -2,12 +2,14 @@ sudo: false
 language: python
 python: 3.8
 env:
+  - TOXENV=codeqa-format
+  - TOXENV=codeqa-quality
+  - TOXENV=codeqa-security
   - TOXENV=py36
   - TOXENV=py37
   - TOXENV=py38
   - TOXENV=py39
   - TOXENV=pypy3
-  - TOXENV=codestyle
 
 install: pip install tox
 
