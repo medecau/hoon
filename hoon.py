@@ -1,9 +1,4 @@
-import six
 import functools
-
-
-if six.PY3:
-    reduce = functools.reduce
 
 
 def partial(f, *args, **kwargs):
@@ -33,7 +28,7 @@ def reduced(f):
 
     @functools.wraps(f)
     def __reduced(i):
-        return reduce(f, i)
+        return functools.reduce(f, i)
 
     return __reduced
 
@@ -57,12 +52,8 @@ def translate(s, old, new):
     Translate each character in old to the character
     at the same positionin new
     """
-    if six.PY3:
-        trans = type(old).maketrans(old, new)
-    else:
-        import string
+    trans = type(old).maketrans(old, new)
 
-        trans = string.maketrans(old, new)
     return s.translate(trans)
 
 
@@ -131,7 +122,7 @@ def int_bytes(n):
     """
     Converts integers to bytes.
     """
-    r = six.binary_type()
+    r = bytes()
     while n > 0:
         r += chr(n % 256).encode()
         n = int(n / 256)
